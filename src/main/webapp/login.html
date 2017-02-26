@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<style type="text/css">
+	h6.descript {
+		font-size: 14px;
+		margin-top: 0px;
+		padding-top: 10px;
+		padding-left: 0px;
+		text-align: center;
+		color: #A3A3A3;
+	}
+</style>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>blogadmin管理平台</title>
+
+	<!--- CSS --->
+	<link rel="stylesheet" href="blogadmin/css/login.css" />
+	<link rel="stylesheet" href="blogadmin/css/font-awesome.css" />
+	
+	<script src="blogadmin/js/jquery-1.7.1.min.js"></script>
+	<script src="blogadmin/js/selectivizr.js"></script>
+	<script src="blogadmin/js/jquery.js"></script>
+	<script src="blogadmin/js/jquery.gesture.password.js"></script>
+	<script src="blogadmin/js/bootstrap.js"></script>
+	<script src="blogadmin/js/bootbox.js"></script>
+	<script src="blogadmin/js/validate.js"></script>
+</head>
+
+<body>
+	<div id="container" class="welcome">
+		<div class="login">blogadmin管理平台</div>
+		<div class="username-text">用户名:</div>
+		<div class="password-text">密 码:</div>
+		<div class="username-field">
+			<input type="text" id="user_name" name="userName" />
+		</div>
+		<div class="password-field">
+			<input type="password" id="password" name="password" />
+		</div>
+		<input type="checkbox" name="remember-me" id="remember-me" /><label
+			for="remember-me">记住密码</label>
+		<div class="forgot-usr-pwd">
+			忘记 <a href="#">用户名</a> 或 <a href="#">密码</a>?
+		</div>
+		<input type="submit" name="submit" value="GO" />
+		<div class="error-msg">
+			<span id="res_msg"></span>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	$(document).on("click", "input[type=submit]", function () {
+		$('#res_msg').html("");
+		validate($("#user_name"));
+		validate($("#password"));
+		var name = $('#user_name').val();
+		var pwd = $('#password').val();
+		if (name != "" && pwd != "") {
+			bootbox.dialog({
+				message: '<h6 class="descript">请按箭头指示滑动鼠标以完成验证</h6>' +
+				'<div id="gesturepwd" style="margin-right:auto"></div>'+
+				'<a id="refresh" class="btn btn-block btn-xs  btn-primary " style="margin-top: 5px;"><i class="ace-icon fa fa-refresh"></i> 点此刷新</a>',
+			});
+			$(".modal-dialog").css("width", "270px");
+			$(".modal-dialog").css("margin-top", "10%");
+			gesturePassword();
+		}else{
+			$('#res_msg').html("用户名或密码不能为空");
+		}
+	});
+
+	function gesturePassword(){
+		$("#gesturepwd").GesturePasswd({
+			background:"url(./verifycode?"+new Date().getTime()+")",  //背景色
+			color:"#A3A3A3",   //主要的控件颜色
+			roundRadii:25,    //大圆点的半径
+			pointRadii:6, //大圆点被选中时显示的圆心的半径
+			space:30,  //大圆点之间的间隙
+			width:240,   //整个组件的宽度
+			height:240,  //整个组件的高度
+			lineColor:"#00aec7",   //用户划出线条的颜色
+			zindex :100  //整个组件的css z-index属性
+		});
+	}
+	$(document).on("hasPasswd", "#gesturepwd", function (e, passwd) {
+		bootbox.hideAll();
+		var name = $('#user_name').val();
+		var pwd = $('#password').val();
+		jQuery.ajax({
+			type: 'post',
+			url: './sys/user/login',
+			data: {'username': name, 'password': pwd, 'code': passwd},
+			dataType: 'json',
+			success: function (data) {
+				if (data.success) {
+					window.location.href = "./sys/menu/index.htm";
+				} else {
+					$('#res_msg').html(data.message);
+					$('#code_img').src = "./verifycode?" + new Date().getTime();
+				}
+			},
+			error: function (data) {
+				alert('系统异常，请联系系统管理员!');
+			}
+		});
+	});
+	$(document).on("click","#refresh",function(){
+		document.getElementById("gesturepwd").style.background = "url(./verifycode?"+ new Date().getTime() +")";
+	})
+</script>
+</body>
+</html>

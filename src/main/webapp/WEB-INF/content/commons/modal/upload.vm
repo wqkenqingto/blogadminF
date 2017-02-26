@@ -1,0 +1,36 @@
+		<div id="upload_modal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="uploadForm" name="uploadForm" class="form-horizontal">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h3 class="smaller lighter blue no-margin">上传文件</h3>
+					</div>
+
+					<div class="modal-body">
+						<div class="form-group">
+							<div id="drag-and-drop-zone" class="uploader">
+						    	<div>拖动Excel</div>
+						        <div class="or">或者</div>
+						        <div class="browser">
+						          <label>
+						            <span>点击打开文件浏览器</span>
+						            <input type="file" name="files[]" accept="*" multiple="multiple" title='点击上传图片'>
+						          </label>
+						        </div>
+							</div>
+						</div>
+						<div class="demo-panel-files" id='demo-files'>
+			            </div>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="ace-icon fa fa-times"></i>
+							关闭
+						</button>
+					</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>

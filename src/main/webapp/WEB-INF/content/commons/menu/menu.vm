@@ -1,0 +1,63 @@
+<div class="leftMenu">
+	<div class="menu">
+		<div class="menuParent">
+			<div class="ListTitlePanel">
+				<div class="ListTitle">
+					<strong><a href="${base}/act/report/index.htm?actToken=$!{actToken}&menu='index'">概况</a></strong>
+				</div>
+			</div>
+		</div>
+		<div class="menuParent">
+			<div class="ListTitlePanel">
+				<div class="ListTitle">
+					<strong>微信传播</strong>
+				</div>
+			</div>
+			<div class="menuList">
+				<div><a #if($menu=='spread')class="active"#end href="${base}/act/report/spread.htm?actToken=$!{actToken}&menu=spread">传播图</a></div>
+				<div><a #if($menu=='kol')class="active"#end href="${base}/act/report/kol.htm?actToken=$!{actToken}&menu=kol">用户列表</a></div>
+				<div><a #if($menu=='level')class="active"#end href="${base}/act/report/level.htm?actToken=$!{actToken}&menu=level">传播层级</a></div>
+			</div>
+		</div>
+		<div class="menuParent">
+			<div class="ListTitlePanel">
+				<div class="ListTitle">
+					<strong>流向分析</strong>
+				</div>
+			</div>
+			<div class="menuList">
+				<div><a #if($menu=='from')class="active"#end href="${base}/act/report/from.htm?actToken=$!{actToken}&menu=from">阅读来源</a></div>
+				<div><a #if($menu=='share')class="active"#end href="${base}/act/report/share.htm?actToken=$!{actToken}&menu=share">分享去向</a></div>
+			</div>
+		</div>
+		<div class="menuParent">
+			<div class="ListTitlePanel">
+				<div class="ListTitle">
+					<strong>用户分析</strong>
+				</div>
+			</div>
+			<div class="menuList">
+				<div><a #if($menu=='sex')class="active"#end href="${base}/act/report/sex.htm?actToken=$!{actToken}&menu=sex">性别比例</a></div>
+				<div><a #if($menu=='area')class="active"#end href="${base}/act/report/area.htm?actToken=$!{actToken}&menu=area">地域分布</a></div>
+			</div>
+		</div>
+		<div class="menuParent">
+			<div class="ListTitlePanel">
+				<div class="ListTitle">
+					<strong>终端属性</strong>
+				</div>
+			</div>
+			<div class="menuList">
+				<div><a #if($menu=='device')class="active"#end href="${base}/act/report/device.htm?actToken=$!{actToken}&menu=device">设备终端</a></div>
+				<div><a #if($menu=='system')class="active"#end href="${base}/act/report/system.htm?actToken=$!{actToken}&menu=system">系统版本</a></div>
+				<div><a #if($menu=='equipment')class="active"#end href="${base}/act/report/equipment.htm?actToken=$!{actToken}&menu=equipment">设备型号</a></div>
+				<div><a #if($menu=='network')class="active"#end href="${base}/act/report/network.htm?actToken=$!{actToken}&menu=network">网络类型</a></div>
+				<div><a #if($menu=='wechatvs')class="active"#end href="${base}/act/report/wechatvs.htm?actToken=$!{actToken}&menu=wechatvs">微信版本</a></div>
+				<div><a #if($menu=='browser')class="active"#end href="${base}/act/report/browser.htm?actToken=$!{actToken}&menu=browser">浏览器</a></div>
+				<!--
+				<div><a href="#">运营商</a></div>
+				-->
+			</div>
+		</div>
+	</div>
+</div>

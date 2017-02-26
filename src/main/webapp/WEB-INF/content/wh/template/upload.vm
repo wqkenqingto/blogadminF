@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<LINK rel=stylesheet href="${base}/mocentre/css/adbd.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/component.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/ui.jqgrid.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/bootstrap.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/bootstrap-duallistbox.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/select2.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/dropzone.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/circlebot.css" />
+<LINK rel="stylesheet" type="text/css"
+	href="${base}/mocentre/css/screen.css" />
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>数据分组</title>
+<meta name="keywords" content="上传模板" />
+<meta name="description" content="上传模板" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+#parse("commons/commonCss.vm") #parse("commons/commonJs.vm")
+</head>
+
+<body class="no-skin">
+	#parse("commons/header.vm")
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="main-container-inner">
+
+			#parse("commons/sidebar.vm")
+			<div class="main-content">
+
+				#parse("commons/breadcrumbs.vm")
+				<div class="page-content">
+					#parse("commons/setting.vm")
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<form action="${base}/wh/template/addUploadFile.htm" class="dropzone" id="dropzone" enctype="multipart/form-data">
+								<div class="fallback">
+									<input name="file" type="file"/>
+								</div>
+							</form>
+							<div class="ph-post1-wrapper">
+								<span class="button" data-title="开始上传" onclick="commitUploadFile()"> 
+									<span><span >开始上传</span></span>
+								</span>
+							</div>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
+
+		</div>
+		<!-- /.main-container-inner -->
+
+		#parse("commons/scroll.vm")
+	</div>
+	<!-- /.main-container -->
+
+	#parse("commons/footerJs.vm")
+	<script type="text/javascript">
+		window.jQuery
+				|| document
+						.write("<script src='/smsflow/mocentre/js/jquery.js'>"
+								+ "<"+"/script>");
+	</script>
+	<script src="${base}/mocentre/js/dropzone.js"></script>
+
+	<script type=text/javascript>
+		var myDropzone;
+		jQuery(function($) {
+			try {
+				Dropzone.autoDiscover = false;
+				myDropzone = new Dropzone(
+						"#dropzone",
+						{
+							paramName : "file", // The name that will be used to transfer the file
+							maxFilesize : 1024, // MB
+
+							addRemoveLinks : true,
+							dictDefaultMessage : '<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> Drop files</span> to upload \
+			<span class="smaller-80 grey">(or click)</span> <br /> \
+			<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>',
+							dictResponseError : 'Error while uploading file!',
+
+							//change the previewTemplate to use Bootstrap progress bars
+							previewTemplate : "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+							removedfile : function(file){
+								var _ref;
+						        if (file.previewElement) {
+						          if ((_ref = file.previewElement) != null) {
+						            _ref.parentNode.removeChild(file.previewElement);
+						          }
+						        }
+						        
+								$.ajax({
+								    "type": "POST",
+								    "data":  {"removeFileName":file.name},
+								    "datatype":'json',
+								    "url": '${base}/wh/template/removeUploadFile.htm'
+								})
+								
+								return this._updateMaxFilesReachedClass();
+							}
+						});
+
+				$(document).one('ajaxloadstart.page', function(e) {
+					try {
+						myDropzone.destroy();
+					} catch (e) {
+					}
+				});
+
+			} catch (e) {
+				alert('Dropzone.js does not support older browsers!');
+			}
+		});
+		function commitUploadFile(){
+			if(myDropzone.files.length == 0){
+				$.toast({
+					heading: '警告！',
+					text: '请先选择要上传的文件！',
+					showHideTransition: 'slide',
+					position: 'bottom-right',
+					icon: 'warning'
+					})
+			}else{
+				$.ajax({
+				    "type": "POST",
+				    "data":  {},
+				    "datatype":'json',
+				    "url": '${base}/wh/template/commitUploadFile.htm',
+				    "success" : function(data){
+				    	if(!data.success){
+				    		$.toast({
+					    		heading: '警告！',
+								text: data.message,
+								showHideTransition: 'slide',
+								position: 'bottom-right',
+								icon: 'warning'
+								})
+				    	}else{
+					    	$.toast({
+								heading: '上传成功！',
+								text: '文件上传成功！',
+								showHideTransition: 'slide',
+								position: 'bottom-right',
+								icon: 'success'
+								})
+				    		//清空上传队列
+				    		myDropzone.destroy();
+				    	}
+				    }
+				});
+				$.toast({
+					heading: '已提交上传！',
+					text: '上传文件已经提交，请耐心等待数据更新。',
+					showHideTransition: 'slide',
+					position: 'bottom-right',
+					icon: 'success'
+					})
+				//跳转回主页
+                window.location.href="${base}/wh/template/index.htm";
+			}
+		}
+	</script>
+</body>
+</html>
