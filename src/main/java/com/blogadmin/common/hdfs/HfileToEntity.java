@@ -1,7 +1,7 @@
 package com.blogadmin.common.hdfs;
 
 import com.blogadmin.common.product.EntityProduct;
-import com.blogadmin.wh.model.Unit;
+import com.blogadmin.blog.model.Unit;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;

@@ -33922,8 +33922,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // rowOtherLength is the height of the subdivision,
 	        // and nodes will be positioned from left to right.
 
-	        // wh[idx0WhenH] means: when horizontal,
-	        //      wh[idx0WhenH] => wh[0] => 'width'.
+	        // blog[idx0WhenH] means: when horizontal,
+	        //      blog[idx0WhenH] => blog[0] => 'width'.
 	        //      xy[idx1WhenH] => xy[1] => 'y'.
 	        var idx0WhenH = rowFixedLength === rect.width ? 0 : 1;
 	        var idx1WhenH = 1 - idx0WhenH;

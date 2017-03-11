@@ -80,7 +80,7 @@
 					"serverSide": true,
 					"iDisplayLength" : 10,
 					"ajax": {
-	               		url:"${base}/wh/template/queryPaged.htm",
+	               		url:"${base}/blog/template/queryPaged.htm",
 	               		type:"post",
 	               		data: function (d) {
 	                   		d.roleName = $('#role_name').val();
@@ -167,7 +167,7 @@
 				Box.confirm("是否确认删除?",function(){
 					jQuery.ajax({
 			            type: 'post', 
-			            url: '${base}/wh/template/delete.htm',  
+			            url: '${base}/blog/template/delete.htm',
 			            data:  {"ids":id},
 			            dataType: 'json',
 			            success: function(data){
@@ -187,7 +187,7 @@
 			function allotTemplate(){
 				jQuery.ajax({
 		            type: 'post', 
-		            url: '${base}/wh/template/allot.htm',
+		            url: '${base}/blog/template/allot.htm',
 		            success: function(data){
 		            	if(data.success){
 		            		mTable.fnDraw();

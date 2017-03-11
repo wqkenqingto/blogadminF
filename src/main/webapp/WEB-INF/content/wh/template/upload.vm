@@ -115,7 +115,7 @@
 								    "type": "POST",
 								    "data":  {"removeFileName":file.name},
 								    "datatype":'json',
-								    "url": '${base}/wh/template/removeUploadFile.htm'
+								    "url": '${base}/blog/template/removeUploadFile.htm'
 								})
 								
 								return this._updateMaxFilesReachedClass();
@@ -147,7 +147,7 @@
 				    "type": "POST",
 				    "data":  {},
 				    "datatype":'json',
-				    "url": '${base}/wh/template/commitUploadFile.htm',
+				    "url": '${base}/blog/template/commitUploadFile.htm',
 				    "success" : function(data){
 				    	if(!data.success){
 				    		$.toast({
@@ -178,7 +178,7 @@
 					icon: 'success'
 					})
 				//跳转回主页
-                window.location.href="${base}/wh/template/index.htm";
+                window.location.href="${base}/blog/template/index.htm";
 			}
 		}
 	</script>

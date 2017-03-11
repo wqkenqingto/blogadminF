@@ -1,6 +1,6 @@
 package com.blogadmin.common.product;
 
-import com.blogadmin.wh.model.Unit;
+import com.blogadmin.blog.model.Unit;
 
 /**
  * Created by wqkenqin on 2016/11/9.
