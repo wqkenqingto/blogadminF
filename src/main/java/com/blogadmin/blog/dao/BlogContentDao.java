@@ -1,7 +1,6 @@
 package com.blogadmin.blog.dao;
 
-import com.blogadmin.blog.model.Aritcle;
-import com.blogadmin.blog.model.Unit;
+import com.blogadmin.blog.model.Article;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,13 +9,15 @@ import java.util.List;
  * Created by wqkenqing on 2017/3/10.
  */
 public interface BlogContentDao {
-    Aritcle get(Serializable id);
+    Article get(Serializable id);
 
     int logicRemove(Serializable id);
 
-    List<Aritcle> getAll();
+    List<Article> getAll();
 
-    Long updateEntity(Aritcle aritcle);
+    Long updateEntity(Article article);
 
-    Long saveEntity(Aritcle aritcle);
+    Long saveEntity(Article article);
+
+    Integer delete(Article article);
 }
