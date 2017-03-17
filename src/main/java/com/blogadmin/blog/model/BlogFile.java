@@ -3,12 +3,12 @@ package com.blogadmin.blog.model;
 import com.blogadmin.core.model.BaseEntity;
 
 /**
-*@className:BlogFile
-*@author:wqkenqing
-*@describe:用于存放一些博客文件，如图片，模板等
-*@date:2017/3/10
-**/
-public class BlogFile extends BaseEntity{
+ * @className:BlogFile
+ * @author:wqkenqing
+ * @describe:用于存放一些博客文件，如图片，模板等
+ * @date:2017/3/10
+ **/
+public class BlogFile extends BaseEntity {
     private String name;
     private String filepath;
     private String memo;

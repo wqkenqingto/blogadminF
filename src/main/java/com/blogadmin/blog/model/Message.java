@@ -3,20 +3,31 @@ package com.blogadmin.blog.model;
 import com.blogadmin.core.model.BaseEntity;
 
 /**
-*@className:Message
-*@author:wqkenqing
-*@describe:信息交流bean
-*@date:2017/3/10
-**/
-public class Message extends BaseEntity{
-    private String name;
+ * @className:Message
+ * @author:wqkenqing
+ * @describe:信息交流bean
+ * @date:2017/3/10
+ **/
+public class Message extends BaseEntity {
     private String content;
-    public String getName() {
-        return name;
+    private String usermark;
+    private String memo;
+
+    public String getMemo() {
+        return memo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+
+    public String getUsermark() {
+        return usermark;
+    }
+
+    public void setUsermark(String usermark) {
+        this.usermark = usermark;
     }
 
     public String getContent() {
@@ -26,7 +37,6 @@ public class Message extends BaseEntity{
     public void setContent(String content) {
         this.content = content;
     }
-
 
 
 }

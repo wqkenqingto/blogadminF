@@ -11,7 +11,7 @@ import java.util.List;
 public interface MessageIODao {
     Message get(Serializable id);
 
-    int logicRomove(Serializable id);
+    Long logicRomove(Serializable id);
 
     List<Message> getAll();
 
