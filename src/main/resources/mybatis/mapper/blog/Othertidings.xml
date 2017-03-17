@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blogadmin.blog.model.Othertidings">
+    <resultMap id="get-Othertidings-result" type="com.blogadmin.blog.model.Othertidings">
+        <id property="id" column="id"/>
+        <!-- 编码-->
+        <result property="name" column="name"/>
+        <!-- 文章内容-->
+        <result property="content" column="content"/>
+        <!-- 备注-->
+        <result property="memo" column="memo"/>
+        <!-- 创建时间-->
+        <result property="gmtCreated" column="gmt_created"/>
+        <!-- 更新时间-->
+        <result property="gmtModified" column="gmt_modified"/>
+        <!-- 是否删除-->
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <sql id="Othertidings_Base_Column_List">
+        id,
+        content,
+        memo,
+        gmt_created,
+        gmt_modified,
+        is_deleted
+    </sql>
+
+    <!--<select id="Othertidings_count" resultType="map">-->
+        <!--select-->
+        <!--(select count(0) from blog_othertidings where is_deleted = 0) as count-->
+    <!--</select>-->
+
+    <!---->
+
+    <select id="Othertidings_get" resultMap="get-Othertidings-result">
+        select
+        <include refid="Othertidings_Base_Column_List"/>
+        from
+        blog_othertidings
+        where
+        id = #{id}
+    </select>
+
+    <select id="Othertidings_list" resultMap="get-Othertidings-result">
+        select
+        <include refid="Othertidings_Base_Column_List"/>
+        from
+        blog_othertidings
+        where
+        is_deleted = 0
+    </select>
+
+    <insert id="Othertidings_insert" parameterType="com.blogadmin.blog.model.Othertidings">
+        insert into blog_othertidings(
+        name,
+        content,
+        memo,
+        gmt_created,
+        gmt_modified,
+        is_deleted
+        )
+        values(
+         #{name},#{content}, #{memo},now(),now(),0
+        )
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <insert id="Othertidings_insert_batch" parameterType="java.util.List">
+        insert into
+        blog_othertidings
+        (
+        name,
+        content,
+        memo,
+        gmt_created,
+        gmt_modified,
+        is_deleted
+        )values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.name},
+            #{item.content},
+            #{item.memo},
+            now(),
+            now(),
+            0
+            )
+        </foreach>
+    </insert>
+
+    <update id="Othertidings_logicDelete" parameterType="com.blogadmin.blog.model.Othertidings">
+        update
+        blog_othertidings
+        set
+        is_deleted=1,
+        gmt_modified = now()
+        where
+        id = #{id}
+    </update>
+    <update id="Othertidings_update" parameterType="com.blogadmin.blog.model.Othertidings">
+        update blog_othertidings
+        set
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="content != null">
+            content = #{content},
+        </if>
+        <!--<if test="gmt_created != null" >-->
+        <!--gmt_created = ${gmt_created},-->
+        <!--</if>-->
+        <if test="memo !=null">
+            memo=#{memo},
+        </if>
+        gmt_modified=now()
+        where
+        id = #{id}
+    </update>
+    <delete id="Othertidings_delete" parameterType="com.blogadmin.blog.model.Othertidings">
+        delete from blog_othertidings where id=#{id}
+    </delete>
+</mapper>

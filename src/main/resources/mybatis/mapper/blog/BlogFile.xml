@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blogadmin.blog.model.BlogFile">
+    <resultMap id="get-BlogFile-result" type="com.blogadmin.blog.model.BlogFile">
+        <id property="id" column="id"/>
+        <!--文件名-->
+        <result property="name" column="name"/>
+        <!-- 文件路径-->
+        <result property="filepath" column="filepath"/>
+        <!-- 文章内容-->
+        <!-- 备注-->
+        <result property="memo" column="memo"/>
+        <!-- 创建时间-->
+        <result property="gmtCreated" column="gmt_created"/>
+        <!-- 更新时间-->
+        <result property="gmtModified" column="gmt_modified"/>
+        <!-- 是否删除-->
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <sql id="BlogFile_Base_Column_List">
+        id,
+        name,
+        filepath,
+        memo,
+        gmt_created,
+        gmt_modified,
+        is_deleted
+    </sql>
+
+    <!--<select id="BlogFile_count" resultType="map">-->
+    <!--select-->
+    <!--(select count(0) from blog_blogfile where is_deleted = 0) as count-->
+    <!--</select>-->
+
+    <!--<select id="BlogFile_get_limit" resultMap="get-BlogFile-result">-->
+    <!--select-->
+    <!--<include refid="BlogFile_Base_Column_List"/>-->
+    <!--from-->
+    <!--blog_blogfile-->
+    <!--where-->
+    <!--is_deleted = 0-->
+    <!--limit-->
+    <!--#{limitBegin}-->
+    <!--,-->
+    <!--#{limitEnd}-->
+    <!--</select>-->
+
+    <select id="BlogFile_get" resultMap="get-BlogFile-result">
+        select
+        <include refid="BlogFile_Base_Column_List"/>
+        from
+        blog_blogfile
+        where
+        id = #{id}
+    </select>
+
+    <select id="BlogFile_list" resultMap="get-BlogFile-result">
+        select
+        <include refid="BlogFile_Base_Column_List"/>
+        from
+        blog_blogfile
+        where
+        is_deleted = 0
+    </select>
+
+    <insert id="BlogFile_insert" parameterType="com.blogadmin.blog.model.BlogFile">
+        insert into blog_blogfile(
+        name,
+        filepath,
+        memo,
+        gmt_created,
+        gmt_modified,
+        is_deleted
+        )
+        values(
+        #{name}, #{filepath},#{memo}, now(),now(),0
+        )
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <insert id="BlogFile_insert_batch" parameterType="java.util.List">
+        insert into
+        blog_blogfile
+        (
+        name,
+        filepath,
+        gmt_created,
+        gmt_modified,
+        is_deleted,
+        memo
+        )values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.name},
+            #{item.filepath},
+            now(),
+            now(),
+            0,
+            #{item.memo}
+            )
+        </foreach>
+    </insert>
+
+    <update id="BlogFile_logicDelete" parameterType="com.blogadmin.blog.model.BlogFile">
+        update
+        blog_blogfile
+        set
+        is_deleted=1,
+        gmt_modified = now()
+        where
+        id = #{id}
+    </update>
+    <update id="BlogFile_update" parameterType="com.blogadmin.blog.model.BlogFile">
+        update blog_blogfile
+        set
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <!--<if test="gmt_created != null" >-->
+        <!--gmt_created = ${gmt_created},-->
+        <!--</if>-->
+        <if test="memo !=null">
+            memo=#{memo},
+        </if>
+        <if test="filepath !=null">
+            filepath=#{filepath},
+        </if>
+        gmt_modified=now()
+--         gmt_created =now()
+        where
+        id = #{id}
+    </update>
+    <delete id="BlogFile_delete" parameterType="com.blogadmin.blog.model.BlogFile">
+        delete from blog_blogfile where id=#{id}
+    </delete>
+</mapper>

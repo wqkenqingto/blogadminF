@@ -1,5 +1,6 @@
 package com.blogadmin.common.product;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,9 +25,27 @@ public class BeanProduct {
         System.out.println(fields.length);
 
         for (Field field : fields) {
-            field.set(o, "test"+(int)(Math.random()*100));
+            field.set(o, "test" + (int) (Math.random() * 100));
         }
 
+        return o;
+    }
+
+    public static Object updateProduct(String beanName,Long id) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+        beanName = beanName;
+        Class clss = Class.forName(beanprefix + beanName);
+        Field[] fields = clss.getDeclaredFields();//获取所有属性
+//        Field[] sfields = clss.getSuperclass().getDeclaredFields();
+
+        Object o = clss.newInstance();
+        Field.setAccessible(fields, true);
+        System.out.println(fields.length);
+        for (Field field : fields) {
+            field.set(o, "test" + (int) (Math.random() * 100));
+        }
+        Field f = clss.getSuperclass().getDeclaredField("id");
+        f.setAccessible(true);
+        f.set(o, id);
         return o;
     }
 }

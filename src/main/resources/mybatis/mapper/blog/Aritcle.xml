@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blogadmin.blog.model.Aritcle">
-    <resultMap id="get-Aritcle-result" type="com.blogadmin.blog.model.Aritcle">
+<mapper namespace="com.blogadmin.blog.model.Article">
+    <resultMap id="get-Article-result" type="com.blogadmin.blog.model.Article">
         <id property="id" column="id" />
         <!-- 编码-->
         <result property="type" column="type" />
@@ -17,7 +17,7 @@
         <result property="isDeleted" column="is_deleted" />
     </resultMap>
 
-    <sql id="Aritcle_Base_Column_List">
+    <sql id="Article_Base_Column_List">
         id,
         name,
         content,
@@ -28,14 +28,14 @@
         type
     </sql>
 
-    <select id="Aritcle_count"  resultType="map">
+    <select id="Article_count"  resultType="map">
         select
         (select count(0) from blog_article where is_deleted = 0) as count
     </select>
 
-    <select id="Aritcle_get_limit"  resultMap="get-Aritcle-result">
+    <select id="Article_get_limit"  resultMap="get-Article-result">
         select
-        <include refid="Aritcle_Base_Column_List" />
+        <include refid="Article_Base_Column_List" />
         from
         blog_article
         where
@@ -46,26 +46,26 @@
         #{limitEnd}
     </select>
 
-    <select id="Aritcle_get"  resultMap="get-Aritcle-result">
+    <select id="Article_get"  resultMap="get-Article-result">
         select
-        <include refid="Aritcle_Base_Column_List" />
+        <include refid="Article_Base_Column_List" />
         from
         blog_article
         where
         id = #{id}
     </select>
 
-    <select id="Aritcle_list"  resultMap="get-Aritcle-result">
+    <select id="Article_list"  resultMap="get-Article-result">
         select
-        <include refid="Aritcle_Base_Column_List" />
+        <include refid="Article_Base_Column_List" />
         from
         blog_article
         where
         is_deleted = 0
     </select>
 
-    <insert id="Aritcle_insert" parameterType="com.blogadmin.blog.model.Aritcle">
-        insert into blog_aritcle(
+    <insert id="Article_insert" parameterType="com.blogadmin.blog.model.Article">
+        insert into blog_article(
         name,
         content,
         gmt_created,
@@ -81,7 +81,7 @@
         </selectKey>
     </insert>
 
-    <insert id="Aritcle_insert_batch" parameterType="java.util.List" >
+    <insert id="Article_insert_batch" parameterType="java.util.List" >
         insert into
         blog_article
         (
@@ -106,7 +106,7 @@
         </foreach>
     </insert>
 
-    <update id="Aritcle_logicDelete" parameterType="com.blogadmin.blog.model.Aritcle">
+    <update id="Article_logicDelete" parameterType="com.blogadmin.blog.model.Article">
         update
         blog_article
         set
@@ -115,8 +115,8 @@
         where
         id = #{id}
     </update>
-    <update id="Aritcle_update" parameterType="com.blogadmin.blog.model.Aritcle" >
-        update blog_aritcle
+    <update id="Article_update" parameterType="com.blogadmin.blog.model.Article" >
+        update blog_article
         set
         <if test="name != null" >
             name = #{name},
@@ -124,17 +124,21 @@
         <if test="content != null" >
             content = #{content},
         </if>
-        <if test="gmt_created != null" >
-            gmt_created = #{gmt_created},
-        </if>
+        <!--<if test="gmt_created != null" >-->
+            <!--gmt_created = ${gmt_created},-->
+        <!--</if>-->
         <if test="memo !=null">
-            memo=#{memo}
+            memo=#{memo},
         </if>
         <if test="type !=null">
-            type=#{type}
+            type=#{type},
         </if>
-        gmt_modified = now()
+        gmt_modified=now(),
+        gmt_created =now()
         where
         id = #{id}
     </update>
+    <delete id="Article_delete" parameterType="com.blogadmin.blog.model.Article">
+        delete from blog_article where id=#{id}
+    </delete>
 </mapper>

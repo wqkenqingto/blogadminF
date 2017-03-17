@@ -9,13 +9,16 @@
 
 + Article测试通过
 
-+ BlogFile 待测试
++ BlogFile 测试通过
 
-+ MessageIO 待测试
++ MessageIO 测试通过
 
-+
++ othertidings 测试通过  
 
-+ Menue
++ Menu  待测试
 
 
----
+
+
+
+接下来是service层与view层的开发

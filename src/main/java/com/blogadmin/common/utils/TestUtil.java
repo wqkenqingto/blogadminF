@@ -18,7 +18,7 @@ public class TestUtil {
     static SqlSession sqlSession;
     static String operate = "";
     static String bean = "";
-
+    static String beanprefix = "com.blogadmin.blog.model.";
     static {
         //spring的方式加载配置文件，并获取sqlsesion
         applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-orm.xml");
@@ -26,7 +26,7 @@ public class TestUtil {
         sqlSession = (SqlSession) ctx.getBean("sqlSession");
     }
 
-    public static void InsertTest(String beanName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void insertTest(String beanName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         System.out.println(beanName);
         bean = beanName;
         String suffix = "_insert";
@@ -36,27 +36,29 @@ public class TestUtil {
         System.out.println("-------添加成功--------");
     }
 
-    public static void updateTest(String beanName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void updateTest(String beanName,Long id) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchFieldException {
         bean = beanName;
         String suffix = "_update";
         operate = bean + suffix;
-        int l = sqlSession.insert(operate, BeanProduct.beanProduct(bean));
+        int l = sqlSession.update(operate, BeanProduct.updateProduct(bean,id));
         System.out.println("-------修改成功--------");
     }
 
-    public static void selectTest(String beanName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static Object selectTest(String beanName,Long id) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         bean = beanName;
-        String suffix = "_select";
+        String suffix = "_get";
         operate = bean + suffix;
-        int l = sqlSession.insert(operate, BeanProduct.beanProduct(bean));
+//        Object o=Class.forName(beanprefix+beanName).newInstance();
+        Object o=sqlSession.selectOne(operate, id);
         System.out.println("-------提取成功--------");
+        return o;
     }
 
-    public static void deleteTest(String beanName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void deleteTest(String beanName,Long id) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         bean = beanName;
-        String suffix = "_select";
+        String suffix = "_delete";
         operate = bean + suffix;
-        int l = sqlSession.insert(operate, BeanProduct.beanProduct(bean));
+        int l = sqlSession.delete(operate,id);
         System.out.println("-------删除成功--------");
     }
 

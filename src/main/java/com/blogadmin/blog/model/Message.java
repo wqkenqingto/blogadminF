@@ -21,10 +21,10 @@ public class Message extends BaseEntity {
         this.memo = memo;
     }
 
-
     public String getUsermark() {
         return usermark;
     }
+
 
     public void setUsermark(String usermark) {
         this.usermark = usermark;
@@ -36,6 +36,15 @@ public class Message extends BaseEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "content='" + content + '\'' +
+                ", usermark='" + usermark + '\'' +
+                ", memo='" + memo + '\'' +
+                '}';
     }
 
 
