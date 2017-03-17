@@ -2,16 +2,19 @@ package com.blogadmin.blog.model;
 
 import com.blogadmin.core.model.BaseEntity;
 
+import java.util.Date;
+
 /**
 *@className:Aritcle
 *@author:wqkenqing
 *@describe:文章bean，可以用作通过type,区分technology、life
 *@date:2017/3/10
 **/
-public class Aritcle extends BaseEntity {
+public class Article extends BaseEntity {
     private String name;
     private String content;
     private String memo;
+
 
     public String getType() {
         return type;

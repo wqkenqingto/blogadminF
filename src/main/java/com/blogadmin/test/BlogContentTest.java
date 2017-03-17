@@ -1,35 +1,43 @@
 package com.blogadmin.test;
 
-import com.blogadmin.blog.dao.BlogContentDao;
-import com.blogadmin.blog.model.Aritcle;
-import com.blogadmin.blog.service.BlogContentService;
-import com.blogadmin.blog.service.impl.BlogContentServiceImpl;
-import org.apache.ibatis.io.Resources;
+import com.blogadmin.blog.model.Article;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.io.Reader;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wqkenqing on 2017/3/10.
  */
 public class BlogContentTest {
-    static Aritcle aritcle;
+
+    static Article article;
 
     //   @Autowired
 //    private BlogContentService blogContentService;
-    public static Aritcle productEntity() {
-        aritcle = new Aritcle();
-        aritcle.setName("ken");
-        aritcle.setType("life");
-        aritcle.setContent("dsjlskjsd");
-        aritcle.setMemo("dsdsd");
-        return aritcle;
+    public static Article productEntity() {
+        article = new Article();
+        article.setName("ken");
+        article.setType("life");
+        article.setContent("dsjlskjsd");
+        article.setMemo("dsdsd");
+        return article;
+    }
+
+    public static Article updateEntity() {
+        article = new Article();
+        article.setId(1L);
+        Date date = new Date();
+        System.out.println(date);
+        article.setGmtCreated(date);
+        article.setName("ken_u");
+        article.setType("life");
+        article.setContent("这里是修改内容");
+        article.setMemo("updating");
+        return article;
     }
 
     static ApplicationContext applicationContext;
@@ -51,17 +59,23 @@ public class BlogContentTest {
 //        //通过sqlSessionFactory打开数据库会话
 //        SqlSession sqlSession = sqlSessionFactory.openSession();
 //        setup();
-        ApplicationContext ctx=null;
-        ctx=new ClassPathXmlApplicationContext("spring/applicationContext-orm.xml");
+        ApplicationContext ctx = null;
+        ctx = new ClassPathXmlApplicationContext("spring/applicationContext-orm.xml");
 //        BlogContentDao blogContentDao= (BlogContentDao) ctx.getBean("sqlSession");
 //        System.out.println(blogContentDao);
-//        blogContentDao.saveEntity(aritcle);
+//        blogContentDao.saveEntity(article);
 //        blogContentDao.saveEntity(productEntity());
-        SqlSession sqlSession=(SqlSession)ctx.getBean("sqlSession");
-       int l= sqlSession.insert("Aritcle_insert",productEntity());
-
-        System.out.println(l);
-        System.out.println("保存成功");
+        SqlSession sqlSession = (SqlSession) ctx.getBean("sqlSession");
+//        int l= sqlSession.insert("Article_insert",updateEntity());
+//       sqlSession.update("Aritcle_update",updateEntity());
+//        System.out.println(l);
+//        sqlSession.update("Article_logicDelete",updateEntity());
+//        sqlSession.delete("Article_delete",updateEntity());
+        List<Article> list = sqlSession.selectList("Article_list");
+        Article article = list.get(4);
+        System.out.println(article.getName());
+        System.out.println(list.size());
+        System.out.println("操作成功");
 
     }
 }
