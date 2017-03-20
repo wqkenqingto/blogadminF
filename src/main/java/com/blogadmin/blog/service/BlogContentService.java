@@ -1,6 +1,6 @@
 package com.blogadmin.blog.service;
 
-import com.blogadmin.blog.model.Aritcle;
+import com.blogadmin.blog.model.Article;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import java.util.List;
 *@date:2017/3/10
 **/
 public interface BlogContentService {
-    public Long addBlog(Aritcle aritcle);
-    public Aritcle getBlog(Long id);
-    public List<Aritcle> ListBlog();
-    public Long updateBlog(Aritcle aritcle);
+    public Long addBlog(Article article);
+    public Article getBlog(Long id);
+    public List<Article> ListBlog();
+    public Long updateBlog(Article article);
     public int removeBlog(Long id);
 }
