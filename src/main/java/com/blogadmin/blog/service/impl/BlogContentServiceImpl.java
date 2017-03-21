@@ -32,11 +32,11 @@ public class BlogContentServiceImpl implements BlogContentService {
 
     @Override
     public Long updateBlog(Article article) {
-        return  blogContentDao.updateEntity(article);
+        return blogContentDao.updateEntity(article);
     }
 
     @Override
     public int removeBlog(Long id) {
-        return blogContentDao.logicRemove( id);
+        return blogContentDao.logicRemove(id);
     }
 }

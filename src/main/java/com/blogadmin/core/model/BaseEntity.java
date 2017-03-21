@@ -8,17 +8,17 @@ import java.util.Date;
  */
 public class BaseEntity implements Serializable {
 
-    private static final long  serialVersionUID = 2734951563954109759L;
+    private static final long serialVersionUID = 2734951563954109759L;
 
-    public static final String PROPERTY_ID      = "id";
-    public static final String GMT_CREATED      = "gmtCreated";
-    public static final String GMT_MODIFIED     = "gmtModified";
-    public static final String IS_DELETED       = "isDeleted";
+    public static final String PROPERTY_ID = "id";
+    public static final String GMT_CREATED = "gmtCreated";
+    public static final String GMT_MODIFIED = "gmtModified";
+    public static final String IS_DELETED = "isDeleted";
 
-    private Long               id;                                     // 唯一标识
-    private Date               gmtCreated;                             // 创建时间
-    private Date               gmtModified;                            // 更新时间
-    private Integer            isDeleted;                              // 有效性
+    private Long id;                                     // 唯一标识
+    private Date gmtCreated;                             // 创建时间
+    private Date gmtModified;                            // 更新时间
+    private Integer isDeleted;                              // 有效性
 
     public Long getId() {
         return id;

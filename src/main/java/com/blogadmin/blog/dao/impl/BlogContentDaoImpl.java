@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class BlogContentDaoImpl extends BaseDao<Article> implements BlogContentDao {
-
     @Override
     public Integer delete(Article article) {
         return getSqlSession().delete("Aritcle_delete", article);

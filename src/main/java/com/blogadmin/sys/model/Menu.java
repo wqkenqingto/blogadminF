@@ -1,4 +1,4 @@
-package com.blogadmin.blog.model;
+package com.blogadmin.sys.model;
 
 import com.blogadmin.core.model.BaseEntity;
 
@@ -9,6 +9,7 @@ import com.blogadmin.core.model.BaseEntity;
 *@date:2017/3/10
 **/
 public class Menu extends BaseEntity{
+
     private String name;
     private String type;
     private String memo;

@@ -11,9 +11,9 @@ import java.util.List;
 *@date:2017/3/10
 **/
 public interface MessageIOService {
-    public int add();
-    public Message getMessage();
+    public Long add(Message message);
+    public Message getMessage(Long id);
     public List<Message> ListMessage();
-    public int updateMessage(Message message);
-    public int removeMessage(int i);
+    public Long updateMessage(Message message);
+    public Long removeMessage(Long id);
 }

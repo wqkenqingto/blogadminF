@@ -16,9 +16,9 @@ public interface OthertidingDao {
 
     List<Othertidings> getAll();
 
-    Long updateEntity(Othertidings article);
+    Long updateEntity(Othertidings othertidings);
 
-    Long saveEntity(Othertidings article);
+    Long saveEntity(Othertidings othertidings);
 
-    Integer delete(Othertidings article);
+    Integer delete(Othertidings othertidings);
 }

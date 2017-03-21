@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * @describe:用于测试接口
  * @date:2017/3/17
  **/
-public class InterfaceTest {
+public class DaoInterfaceTest {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
         long before = System.currentTimeMillis();
         /**测试工具类使用示例
@@ -27,6 +27,7 @@ public class InterfaceTest {
          TestUtil.selectTest("Article",2l);
          TestUtil.deleteTest("Article",2l);
          **/
+        TestUtil.updateTest("Article",3l);
         long after = System.currentTimeMillis();
         System.out.println(after - before);
 

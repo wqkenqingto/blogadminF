@@ -26,9 +26,9 @@ service层与view层的开发
 20号
 service与controller层的测试基类创建完成,测试相应的service与controller
 + BlogContentService 测试通过
-+ BlogFileSerivce   待测试
-+ MessageIOService  待测试
-+ OthertidingService 待测试
++ BlogFileSerivce   测试通过
++ MessageIOService  测试通过
++ OthertidingService 测试通过
 blongContentService
 业务分析:主要是对Article即相关博文进行管理。
 主要的管理逻辑应该有
@@ -40,7 +40,7 @@ blongContentService
 BlogFileSerivce
 业务分析：主要是针对的是博客中的一些文件的上传与下载等管理
 主要的管理逻辑应该有
-+ 文件的上传
++ 文件的上传 上传时即要上传文件至服务器指定目录，还得保存相关上传文件的相关信息
 + 文件的下载
 + 文件的存放(名称，存放地址，大小，类型)
 + 文件的删除(逻辑删除、实体删除)
@@ -53,6 +53,12 @@ MessageIOService
 + 删除留言(逻辑删除、实体删除)
 + 加载留言
 
+OthertidingService 
+业务分析:主要是用针对一些非主要的文本，如公告，新闻等，与博文区分。
+主要的管理逻辑：与blogConent类似
+
+
+MenuDao
 
 
 

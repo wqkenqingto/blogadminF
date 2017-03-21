@@ -13,10 +13,14 @@ import java.lang.reflect.InvocationTargetException;
 public class BeanProduct {
     //bean的自动注入
     static String beanprefix = "com.blogadmin.blog.model.";
+    static String beanprefix1 = "com.blogadmin.sys.model.";
     static String beanName = "";
 
     public static Object beanProduct(String beanName) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         beanName = beanName;
+        if (beanName.equals("Menu")){
+            beanprefix = beanprefix1;
+        }
         Class clss = Class.forName(beanprefix + beanName);
         Field[] fields = clss.getDeclaredFields();//获取所有属性
 //        Field[] sfields = clss.getSuperclass().getDeclaredFields();
@@ -31,7 +35,7 @@ public class BeanProduct {
         return o;
     }
 
-    public static Object updateProduct(String beanName,Long id) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+    public static Object updateProduct(String beanName, Long id) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
         beanName = beanName;
         Class clss = Class.forName(beanprefix + beanName);
         Field[] fields = clss.getDeclaredFields();//获取所有属性
@@ -46,6 +50,7 @@ public class BeanProduct {
         Field f = clss.getSuperclass().getDeclaredField("id");
         f.setAccessible(true);
         f.set(o, id);
+        System.out.println("生成成功");
         return o;
     }
 }

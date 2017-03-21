@@ -1,6 +1,7 @@
 package com.blogadmin.blog.dao;
 
 import com.blogadmin.blog.model.Article;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;

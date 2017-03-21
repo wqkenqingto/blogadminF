@@ -11,13 +11,15 @@ import java.util.List;
  */
 public interface BlogFileDao {
 
-    Long  logicRomove(Serializable id);
+    Long logicRomove(Serializable id);
 
     Long updateEntity(BlogFile blogFile);
 
     Long saveEntity(BlogFile blogFile);
 
     List<BlogFile> getAll();
+
+    BlogFile get(Serializable id);
 
     Integer delete(BlogFile blogFile);
 }

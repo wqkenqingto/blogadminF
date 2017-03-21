@@ -1,14 +1,20 @@
 package com.blogadmin.blog.service.impl;
 
+import com.blogadmin.blog.dao.BlogFileDao;
 import com.blogadmin.blog.model.BlogFile;
 import com.blogadmin.blog.service.BlogFileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by wqkenqing on 2017/3/10.
  */
-public class BlogFileServiceImpl implements BlogFileService{
+@Component
+public class BlogFileServiceImpl implements BlogFileService {
+    @Autowired
+    BlogFileDao blogFileDao;
 
     @Override
     public int uploadBlogFile() {
@@ -26,8 +32,8 @@ public class BlogFileServiceImpl implements BlogFileService{
     }
 
     @Override
-    public BlogFile getBlogFile() {
-        return null;
+    public BlogFile getBlogFile(Long id) {
+        return blogFileDao.get(id);
     }
 
     @Override

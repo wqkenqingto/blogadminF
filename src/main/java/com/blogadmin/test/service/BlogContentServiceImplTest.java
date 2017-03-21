@@ -1,47 +1,46 @@
 package com.blogadmin.test.service;
 
 import com.blogadmin.blog.model.Article;
-import com.blogadmin.blog.service.impl.BlogContentServiceImpl;
+import com.blogadmin.blog.service.BlogContentService;
 import com.blogadmin.common.product.BeanProduct;
 import com.blogadmin.common.utils.SpringTestCase;
+import com.blogadmin.sys.dao.MenuDao;
+import com.blogadmin.sys.model.Menu;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.InvocationTargetException;
+import static org.junit.Assert.*;
 
 /**
- * @className:BlogContentServiceImplTest
- * @author:wqkenqing
- * @describe:BlogContentService的测试类，并做为示例
- * @date:2017/3/20
- **/
+ * Created by wqkenqing on 2017/3/21.
+ */
 public class BlogContentServiceImplTest extends SpringTestCase {
-    @Autowired
-    private BlogContentServiceImpl blogContentService;
-
+//   @Autowired
+//    BlogContentService blogContentService;
+   @Autowired
+    MenuDao menuDao;
     @Test
-    public void saveArticleTest() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        blogContentService.addBlog((Article) BeanProduct.beanProduct("Article"));
+    public void addBlog() throws Exception {
+
+//        blogContentService.addBlog((Article) BeanProduct.beanProduct("Article"));
+        menuDao.saveEntity((Menu) BeanProduct.beanProduct("Menu"));
         System.out.println("添加成功");
     }
 
     @Test
-    public void deleteArticleTest() {
-        blogContentService.removeBlog(3l);
-        System.out.println("删除成功");
+    public void getBlog() throws Exception {
     }
 
     @Test
-    public void selectArticle() {
-        Article article = blogContentService.getBlog(3l);
-        System.out.println(article.getContent());
-        System.out.println("查询完成-------");
+    public void listBlog() throws Exception {
     }
 
     @Test
-    public void updateArticleTest() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
-        blogContentService.updateBlog((Article) BeanProduct.updateProduct("Article", 3l));
-        System.out.println("修改成功");
+    public void updateBlog() throws Exception {
+    }
+
+    @Test
+    public void removeBlog() throws Exception {
     }
 
 }
