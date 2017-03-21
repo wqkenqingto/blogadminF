@@ -6,9 +6,11 @@ import com.blogadmin.blog.model.Othertidings;
 import com.blogadmin.blog.service.OthertidingsService;
 import com.blogadmin.common.product.BeanProduct;
 import com.blogadmin.common.utils.SpringTestCase;
+import com.blogadmin.core.model.BaseEntity;
 import com.blogadmin.sys.dao.MenuDao;
 import com.blogadmin.sys.dao.impl.MenuDaoImpl;
 import com.blogadmin.sys.model.Menu;
+import com.blogadmin.sys.service.MenuService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,26 +25,21 @@ import static org.junit.Assert.*;
 public class InterfaceTest extends SpringTestCase {
     @Autowired
     OthertidingsService othertidingsService;
-
     @Autowired
-    BlogContentDao blogContentDao;
-
-     @Autowired
-     MenuDaoImpl menuDao;
+    MenuService menuService;
 
     @Test
     public void add() throws Exception {
-        othertidingsService.add((Othertidings) BeanProduct.beanProduct("Othertidings"));
-//        System.out.println("添加成功");
-//        blogContentDao.saveEntity((Article) BeanProduct.beanProduct("Article"));
-//        menuDao.saveEntity((Menu) BeanProduct.beanProduct("Menu"));
-        System.out.println("添加成功");
+//        menuService.addMenu((Menu) BeanProduct.beanProduct("Menu"));
+        menuService.removeMenu(1l);
+        System.out.println("测试成功");
     }
 
     @Test
     public void get() throws Exception {
-        Othertidings othertidings = othertidingsService.getOthertidings(2l);
-        System.out.println(othertidings.getContent());
+//        Menu menu=menuDao.get(1l);
+//        System.out.println(menu.getName());
+//        System.out.println("查询成功");
     }
 
     @Test
@@ -52,13 +49,14 @@ public class InterfaceTest extends SpringTestCase {
 
     @Test
     public void update() throws Exception {
-        Othertidings othertidings = (Othertidings) BeanProduct.updateProduct("Othertidings", 2l);
-        othertidingsService.updateOthertidings(othertidings);
-        System.out.println("修改成功");
+//        menuDao.update((Menu) BeanProduct.updateProduct("Menu", 1l));
+//        System.out.println("修改成功");
     }
 
     @Test
     public void remove() throws Exception {
+//        menuDao.logicRemove(2l);
+//        System.out.println("删除成功");
     }
 
 }

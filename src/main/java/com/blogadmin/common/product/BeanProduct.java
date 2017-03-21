@@ -37,6 +37,9 @@ public class BeanProduct {
 
     public static Object updateProduct(String beanName, Long id) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
         beanName = beanName;
+        if (beanName.equals("Menu")){
+            beanprefix = beanprefix1;
+        }
         Class clss = Class.forName(beanprefix + beanName);
         Field[] fields = clss.getDeclaredFields();//获取所有属性
 //        Field[] sfields = clss.getSuperclass().getDeclaredFields();
