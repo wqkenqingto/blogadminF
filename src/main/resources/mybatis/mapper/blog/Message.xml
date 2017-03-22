@@ -114,8 +114,7 @@
         <if test="usermark !=null">
             usermark=#{usermark},
         </if>
-        gmt_modified=now(),
-        gmt_created =now()
+        gmt_modified=now()
         where
         id = #{id}
     </update>
